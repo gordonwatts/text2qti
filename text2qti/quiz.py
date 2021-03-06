@@ -747,7 +747,7 @@ class Quiz(object):
             startupinfo = None
 
         current_env = dict(os.environ)
-        # TODO: Should this be teh path of the exam file?
+        # TODO: Should this be the path of the exam file?
         local_import_directory = os.getcwd()
         if 'PYTHONPATH' in current_env:
             current_env['PYTHONPATH'] += local_import_directory
