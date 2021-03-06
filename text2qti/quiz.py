@@ -18,6 +18,7 @@ import hashlib
 import io
 import itertools
 import locale
+import os
 import pathlib
 import platform
 import re
@@ -744,6 +745,15 @@ class Quiz(object):
             startupinfo.dwFlags |= subprocess.STARTF_USESHOWWINDOW
         else:
             startupinfo = None
+
+        current_env = dict(os.environ)
+        # TODO: Should this be teh path of the exam file?
+        local_import_directory = os.getcwd()
+        if 'PYTHONPATH' in current_env:
+            current_env['PYTHONPATH'] += local_import_directory
+        else:
+            current_env['PYTHONPATH'] = local_import_directory
+        
         with tempfile.TemporaryDirectory() as tempdir:
             tempdir_path = pathlib.Path(tempdir)
             code_path = tempdir_path / f'{h.hexdigest()[:16]}.code'
@@ -754,7 +764,8 @@ class Quiz(object):
                 # be inherited
                 proc = subprocess.run(cmd,
                                       stdout=subprocess.PIPE, stderr=subprocess.PIPE, stdin=subprocess.PIPE,
-                                      startupinfo=startupinfo)
+                                      startupinfo=startupinfo,
+                                      env=current_env)
             except FileNotFoundError as e:
                 raise Text2qtiError(f'Failed to execute code (missing executable "{executable}"?):\n{e}')
             except Exception as e:
