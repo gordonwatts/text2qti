@@ -750,6 +750,7 @@ class Quiz(object):
         # TODO: Should this be the path of the exam file?
         local_import_directory = os.getcwd()
         if 'PYTHONPATH' in current_env:
+            # TODO: Fix up so it works correctly with ":" and ";"
             current_env['PYTHONPATH'] += local_import_directory
         else:
             current_env['PYTHONPATH'] = local_import_directory
