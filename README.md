@@ -503,6 +503,11 @@ operating systems.  All image paths not starting with `http://` or `https://`
 are assumed to refer to local image files (files on your machine), and will
 result in errors if these files are not found.
 
+Use the [attribute extension](https://python-markdown.github.io/extensions/attr_list/)
+in markdown to alter the image size:
+```
+![alt_text](image_file){: width="100px"}
+```
 
 ### LaTeX
 

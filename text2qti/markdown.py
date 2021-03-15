@@ -40,6 +40,7 @@ md_extensions = [
     markdown.extensions.footnotes.makeExtension(),
     markdown.extensions.tables.makeExtension(),
     markdown.extensions.md_in_html.makeExtension(),
+    markdown.extensions.attr_list.makeExtension(),
 ]
 from markdown.inlinepatterns import ImageInlineProcessor, IMAGE_LINK_RE
 
